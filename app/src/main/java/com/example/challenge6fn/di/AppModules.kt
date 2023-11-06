@@ -16,7 +16,7 @@ object AppModules {
     }
 
     private val repositoryModule = module {
-        single<CartRepository> { CartRepository(get()) }
+        single { CartRepository(get()) }
     }
 
     private val viewModelModule = module {

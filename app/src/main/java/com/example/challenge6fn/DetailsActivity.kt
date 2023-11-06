@@ -5,7 +5,6 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.challenge6fn.databinding.ActivityDetailsBinding
 import com.example.challenge6fn.items.CartItem

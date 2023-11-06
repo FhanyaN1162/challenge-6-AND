@@ -15,7 +15,7 @@
             android:id="@+id/txtCartTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Keranjang"
+            android:text="@string/keranjang2"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginTop="16dp"
@@ -61,7 +61,7 @@
                 android:id="@+id/txtTotalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total Harga: Rp. 39.000"
+                android:text="@string/total_harga_rp_39_000"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginTop="16dp"/>
@@ -71,7 +71,7 @@
                 android:id="@+id/btnPlaceOrder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pesan"
+                android:text="@string/pesan2"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginTop="16dp"/>

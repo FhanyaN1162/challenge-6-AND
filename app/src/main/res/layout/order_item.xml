@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp">
@@ -15,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/ayam_goreng"
         android:scaleType="centerCrop"
-        />
+        android:contentDescription="@null"/>
 
     <TextView
         android:id="@+id/txtCartItemName"
@@ -25,7 +24,7 @@
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@+id/imgCartItem"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Nama Item Makanan"
+        android:text="@string/nama_item_makanan_2"
         android:textSize="16sp"
         android:textStyle="bold"
         />
@@ -38,7 +37,7 @@
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@+id/imgCartItem"
         app:layout_constraintTop_toBottomOf="@+id/txtCartItemName"
-        android:text="Rp. 20.000"
+        android:text="@string/rp_20_000_4"
         android:textSize="14sp"
         />
 
@@ -50,7 +49,7 @@
         android:layout_height="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCartItemPrice"
-        android:text="1"
+        android:text="@string/_1_2"
         android:textSize="16sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -75,7 +74,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
-        android:text="Catatan:"
+        android:text="@string/catatan_2"
         android:textSize="14sp"
         android:textStyle="bold"
         />

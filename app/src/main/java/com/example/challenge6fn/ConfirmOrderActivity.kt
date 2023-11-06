@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.challenge6fn.adapter.ConfirmOrderAdapter
 import com.example.challenge6fn.databinding.ActivityConfirmOrderBinding
-import com.example.challenge6fn.items.CartItem
 import com.example.challenge6fn.model.Order
 import com.example.challenge6fn.model.OrderRequest
 import com.example.challenge6fn.viewmodel.CartViewModel

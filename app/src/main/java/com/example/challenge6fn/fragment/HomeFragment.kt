@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,8 +25,7 @@ class HomeFragment : Fragment() {
     private lateinit var menuAdapter: MenuAdapter
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var sharedPrefs: SharedPreferences
-    private val PREF_NAME = "MyPrefs"
-    private val IS_GRID_LAYOUT_KEY = "isGridLayout"
+    private val prefName = "MyPrefs"
     private lateinit var layoutManagerGrid: GridLayoutManager
     private lateinit var layoutManagerLinear: LinearLayoutManager
     private lateinit var currentLayoutManager: RecyclerView.LayoutManager
@@ -36,9 +34,9 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        sharedPrefs = requireActivity().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        sharedPrefs = requireActivity().getSharedPreferences(prefName, Context.MODE_PRIVATE)
 
         // Inisialisasi LayoutManager untuk Grid dan Linear
         layoutManagerGrid = GridLayoutManager(requireContext(), 2)
@@ -124,9 +122,4 @@ class HomeFragment : Fragment() {
         binding.rvCategories.adapter = categoryAdapter
     }
 
-    private fun saveLayoutPreference(isGrid: Boolean) {
-        val editor = sharedPrefs.edit()
-        editor.putBoolean(IS_GRID_LAYOUT_KEY, isGrid)
-        editor.apply()
-    }
 }

@@ -11,11 +11,10 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:scaleType="fitXY"
-        android:paddingTop="16dp"
-        android:paddingStart="16dp"
         android:src="@drawable/left_arrow"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@null"/>
 
 
     <!-- Judul -->
@@ -23,7 +22,7 @@
         android:id="@+id/txtTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Konfirmasi Pesanan"
+        android:text="@string/konfirmasi_pesanan"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +42,7 @@
         android:id="@+id/txtMethodDelivery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Metode Pengiriman"
+        android:text="@string/metode_pengiriman"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
-            android:text="Ambil Sendiri"
+            android:text="@string/ambil_sendiri"
             android:textSize="18sp" />
 
         <RadioButton
@@ -74,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
-            android:text="Dikirim"
+            android:text="@string/dikirim"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -122,7 +121,7 @@
         android:id="@+id/txtMethodPayment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Metode Pembayaran"
+        android:text="@string/metode_pembayaran"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -142,7 +141,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
-            android:text="Bayar Tunai"
+            android:text="@string/bayar_tunai"
             android:textSize="18sp"/>
 
         <RadioButton
@@ -151,7 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
-            android:text="Dompet Digital"
+            android:text="@string/dompet_digital"
             android:textSize="18sp"/>
     </LinearLayout>
 
@@ -172,7 +171,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Ringkasan Pembayaran:"
+        android:text="@string/ringkasan_pembayaran"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -185,7 +184,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Total Pembayaran: Rp. 39.000"
+        android:text="@string/total_pembayaran_rp_39_000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -197,7 +196,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Pesan"
+        android:text="@string/pesan"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

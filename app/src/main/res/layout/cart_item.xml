@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp">
@@ -14,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:scaleType="centerCrop"
-        />
+        android:contentDescription="@null"/>
 
     <TextView
         android:id="@+id/txtCartItemName"
@@ -24,7 +23,7 @@
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@+id/imgCartItem"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Nama Item Makanan"
+        android:text="@string/nama_item_makanan"
         android:textSize="16sp"
         android:textStyle="bold"
         />
@@ -37,7 +36,7 @@
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@+id/imgCartItem"
         app:layout_constraintTop_toBottomOf="@+id/txtCartItemName"
-        android:text="Rp. 20.000"
+        android:text="@string/rp_20_000_2"
         android:textSize="14sp"
         />
 
@@ -51,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtCartItemPrice"
         android:src="@drawable/add"
         android:background="?android:attr/selectableItemBackground"
-        />
+        android:contentDescription="@null"/>
 
     <TextView
         android:id="@+id/txtItemQuantity"
@@ -59,7 +58,7 @@
         android:layout_height="32dp"
         app:layout_constraintEnd_toStartOf="@+id/btnIncrease3"
         app:layout_constraintTop_toBottomOf="@+id/txtCartItemPrice"
-        android:text="1"
+        android:text="@string/_1"
         android:textSize="16sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -74,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtCartItemPrice"
         android:src="@drawable/remove"
         android:background="?android:attr/selectableItemBackground"
-        />
+        android:contentDescription="@null"/>
 
     <ImageButton
         android:id="@+id/btnDelete"
@@ -84,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/trashbin"
-        android:contentDescription="Delete"
+        android:contentDescription="@string/delete"
         android:padding="4dp"
         android:background="?android:attr/selectableItemBackground"
         />
@@ -111,7 +110,7 @@
             android:id="@+id/txtCartNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Catatan:"
+            android:text="@string/catatan"
             android:textSize="14sp"
             android:textStyle="bold" />
         <com.google.android.material.textfield.TextInputEditText
@@ -120,7 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:hint="Tulis Catatan Disini"
+            android:hint="@string/tulis_catatan_disini"
             android:imeOptions="actionDone"
             android:inputType="text"
             android:maxLines="3"

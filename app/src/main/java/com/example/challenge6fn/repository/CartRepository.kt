@@ -1,6 +1,5 @@
 package com.example.challenge6fn.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.challenge6fn.database.CartItemDao
 import com.example.challenge6fn.items.CartItem
