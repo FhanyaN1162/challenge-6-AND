@@ -1,5 +1,6 @@
 package com.example.challenge6fn.adapter
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,7 +17,7 @@ import com.example.challenge6fn.viewmodel.CartViewModel
 class CartAdapter(private val viewModel: CartViewModel,
                   private val onItemClick: (CartItem) -> Unit) :
     ListAdapter<CartItem, CartAdapter.CartViewHolder>(DIFF_CALLBACK)
-    {
+{
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         val binding = CartItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -79,6 +80,7 @@ class CartAdapter(private val viewModel: CartViewModel,
 
 
     inner class CartViewHolder(val binding: CartItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(cartItem: CartItem) {
             Glide.with(itemView.context)
                 .load(cartItem.imageResourceId)

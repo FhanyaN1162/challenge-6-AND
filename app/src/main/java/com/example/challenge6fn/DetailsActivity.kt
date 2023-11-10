@@ -1,5 +1,6 @@
 package com.example.challenge6fn
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -9,18 +10,18 @@ import com.bumptech.glide.Glide
 import com.example.challenge6fn.databinding.ActivityDetailsBinding
 import com.example.challenge6fn.items.CartItem
 import com.example.challenge6fn.viewmodel.CartViewModel
-
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailsBinding
     private lateinit var googleMapsUrl: String
-    private var quantity = 0 // Menyimpan nilai quantity
-    private var pricePerItem = 0 // Harga per item
-    private var totalPrice = 0 // Total harga
+    private var quantity = 0
+    private var pricePerItem = 0
+    private var totalPrice = 0
     private val viewModel: CartViewModel by viewModel()
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
@@ -35,7 +36,7 @@ class DetailsActivity : AppCompatActivity() {
         val restaurantAddress = bundle?.getString("restaurantAddress")
         googleMapsUrl = bundle!!.getString("googleMapsUrl", "")
 
-        if (binding.btnAddToCart2.text == "Tambah Ke Keranjang - Rp.0"){
+        if (binding.btnAddToCart2.text == "Tambah Ke Keranjang - Rp.0") {
             binding.btnAddToCart2.text = "Tambah Ke Keranjang - Rp. $price"
         }
 
@@ -43,26 +44,39 @@ class DetailsActivity : AppCompatActivity() {
 
         imageRes?.let { updateUI(name, price.toString(), description, it, restaurantAddress) }
 
-
-        binding.btnBack.setOnClickListener{
+        binding.btnBack.setOnClickListener {
             finish()
         }
 
-        // Tambahkan onClickListener untuk tombol tambah
+        // Set the pricePerItem in the ViewModel
+        viewModel.setPricePerItem(pricePerItem)
+
+        // Observe LiveData for pricePerItem
+        viewModel.pricePerItem.observe(this) { updatedPricePerItem ->
+            pricePerItem = updatedPricePerItem
+        }
+
+        // Observe LiveData for quantity and total price
+        viewModel.quantity.observe(this) { updatedQuantity ->
+            updateQuantity(updatedQuantity)
+        }
+
+        viewModel.totalPrice.observe(this) { updatedTotalPrice ->
+            totalPrice = updatedTotalPrice
+            binding.btnAddToCart2.text = "Tambah Ke Keranjang - Rp. $totalPrice"
+        }
+
+        //  tombol tambah
         binding.btnIncrease2.setOnClickListener {
-            quantity++
-            updateQuantity(quantity)
+            viewModel.increaseQuantity()
         }
 
-        // Tambahkan onClickListener untuk tombol kurang
+        // tombol kurang
         binding.btnDecrease2.setOnClickListener {
-            if (quantity > 1) {
-                quantity--
-                updateQuantity(quantity)
-            }
+            viewModel.decreaseQuantity()
         }
 
-         //Tambahkan onClickListener untuk tombol "Tambah Ke Keranjang"
+        //  tombol "Tambah Ke Keranjang"
         binding.btnAddToCart2.setOnClickListener {
             // Ambil data makanan untuk disimpan ke dalam keranjang
             val cartItem = CartItem(
@@ -70,10 +84,10 @@ class DetailsActivity : AppCompatActivity() {
                 totalPrice = totalPrice,
                 price = price,
                 quantity = quantity,
-                imageResourceId = imageRes!!, // Gunakan image sebagai Integer
+                imageResourceId = imageRes!!,
             )
-            if (quantity > 0){
-                // Simpan item ke dalam keranjang menggunakan CartItemDao
+            if (quantity > 0) {
+                // Simpan item ke dalam keranjang
                 viewModel.insertCartItem(cartItem)
 
                 // Tampilkan pesan berhasil menambahkan ke keranjang
@@ -81,11 +95,7 @@ class DetailsActivity : AppCompatActivity() {
                 finish()
             } else {
                 Toast.makeText(this@DetailsActivity, "Jumlah item tidak boleh 0!", Toast.LENGTH_SHORT).show()
-
             }
-
-
-
         }
 
         binding.txtGoogleMaps.setOnClickListener {
@@ -98,14 +108,13 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateQuantity(quantity: Int) {
+    private fun updateQuantity(updatedQuantity: Int) {
+        quantity = updatedQuantity
         binding.txtItemQuantity2.text = quantity.toString()
         totalPrice = quantity * pricePerItem
-        binding.btnAddToCart2.text = "Tambah Ke Keranjang - Rp. $totalPrice"
-
     }
 
-
+    @SuppressLint("SetTextI18n")
     private fun updateUI(name: String?, price: String?, description: String?, imageRes: String, restaurantAddress: String?) {
         binding.apply {
             Glide.with(this@DetailsActivity)

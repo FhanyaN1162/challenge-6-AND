@@ -1,5 +1,6 @@
 package com.example.challenge6fn.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -15,6 +16,7 @@ class ConfirmOrderAdapter :
     inner class ViewHolder(private val binding: OrderItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(cartItem: CartItem) {
             Glide.with(itemView.context)
                 .load(cartItem.imageResourceId)

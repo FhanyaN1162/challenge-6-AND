@@ -1,5 +1,6 @@
 package com.example.challenge6fn
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -104,16 +105,17 @@ class ConfirmOrderActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context)
         }
     }
+    @SuppressLint("SetTextI18n")
     private fun observeCartItems() {
-        viewModel.allCartItems.observe(this, Observer { cartItems ->
+        viewModel.allCartItems.observe(this) { cartItems ->
             confirmOrderAdapter.submitList(cartItems)
-            this.orderItems= arrayListOf()
-            for(cart in cartItems){
-                orderItems.add(Order(cart.note,cart.price,cart.foodName,cart.quantity))
+            this.orderItems = arrayListOf()
+            for (cart in cartItems) {
+                orderItems.add(Order(cart.note, cart.price, cart.foodName, cart.quantity))
             }
             val totalPrice = confirmOrderAdapter.calculateTotalPrice()
             binding.txtTotalPayment.text = "Total Price: Rp. $totalPrice"
-        })
+        }
 
     }
 }

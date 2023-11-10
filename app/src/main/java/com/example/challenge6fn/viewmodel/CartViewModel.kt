@@ -21,22 +21,53 @@ class CartViewModel(private val repository: CartRepository) : ViewModel() {
 
     val allCartItems: LiveData<List<CartItem>> = repository.allCartItems
 
+    private val _quantity = MutableLiveData<Int>()
+    val quantity: LiveData<Int> get() = _quantity
+
+    private val _totalPrice = MutableLiveData<Int>()
+    val totalPrice: LiveData<Int> get() = _totalPrice
+
+    private val _pricePerItem = MutableLiveData<Int>()
+    val pricePerItem: LiveData<Int> get() = _pricePerItem
+
     private val orderResult = MutableLiveData<OrderResponse>()
-    fun getOrderResult():LiveData<OrderResponse> = orderResult
+    fun getOrderResult(): LiveData<OrderResponse> = orderResult
+
+    fun increaseQuantity() {
+        _quantity.value = (_quantity.value ?: 0) + 1
+        updateTotalPrice(_pricePerItem.value ?: 0)
+    }
+
+    fun decreaseQuantity() {
+        val currentQuantity = _quantity.value ?: 0
+        if (currentQuantity > 1) {
+            _quantity.value = currentQuantity - 1
+            updateTotalPrice(_pricePerItem.value ?: 0)
+        }
+    }
+
+    fun setPricePerItem(price: Int) {
+        _pricePerItem.value = price
+    }
+
+    private fun updateTotalPrice(pricePerItem: Int) {
+        _totalPrice.value = (_quantity.value ?: 0) * pricePerItem
+    }
 
     fun insertCartItem(cartItem: CartItem) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 val cart = repository.getCartByFoodName(cartItem.foodName)
-                if(cart==null){
+                if (cart == null) {
                     repository.insertCartItem(cartItem)
-                }else{
-                    cart.quantity+=cartItem.quantity
+                } else {
+                    cart.quantity += cartItem.quantity
                     repository.updateCartItem(cart)
                 }
             }
         }
     }
+
     fun updateCartItem(cartItem: CartItem) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateCartItem(cartItem)
@@ -50,6 +81,7 @@ class CartViewModel(private val repository: CartRepository) : ViewModel() {
             }
         }
     }
+
     fun deleteAllCartItems() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
@@ -58,7 +90,7 @@ class CartViewModel(private val repository: CartRepository) : ViewModel() {
         }
     }
 
-    fun order(orderRequest: OrderRequest){
+    fun order(orderRequest: OrderRequest) {
         ApiClient.instance
             .order(orderRequest)
             .enqueue(object : Callback<OrderResponse> {
@@ -66,7 +98,7 @@ class CartViewModel(private val repository: CartRepository) : ViewModel() {
                     call: Call<OrderResponse>,
                     response: Response<OrderResponse>
                 ) {
-                    if (response.isSuccessful){
+                    if (response.isSuccessful) {
                         orderResult.postValue(response.body())
                     }
                 }
@@ -78,5 +110,4 @@ class CartViewModel(private val repository: CartRepository) : ViewModel() {
                 }
             })
     }
-
 }
