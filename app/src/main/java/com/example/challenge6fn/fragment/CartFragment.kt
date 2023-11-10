@@ -1,5 +1,6 @@
 package com.example.challenge6fn.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -51,12 +52,13 @@ class CartFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun observeCartItems() {
-        viewModel.allCartItems.observe(viewLifecycleOwner, Observer { cartItems ->
+        viewModel.allCartItems.observe(viewLifecycleOwner) { cartItems ->
             cartAdapter.submitList(cartItems)
             val totalPrice = cartAdapter.calculateTotalPrice()
             binding.txtTotalPrice.text = "Total Price: Rp. $totalPrice"
-        })
+        }
     }
 
 
